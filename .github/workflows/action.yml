@@ -1,0 +1,26 @@
+name: Run Docker Image
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker
+        uses: docker/setup-docker@v1
+
+      - name: Build Docker image
+        run: docker build -t my-docker-image --build-arg AUTH_TOKEN=${{ secrets.AUTH_TOKEN }} --build-arg PASSWORD=${{ secrets.PASSWORD }} .
+
+      - name: Run Docker container
+        run: docker run -d -p 8080:80 -p 8888:8888 -p 443:443 my-docker-image
