@@ -25,4 +25,4 @@ jobs:
         run: docker build -t ssh4me .
        
       - name: Run Docker container
-        run: docker run -e AUTH_TOKEN=${{ secrets.AUTH_TOKEN }} -e PASSWORD=${{ secrets.PASSWORD }} ssh4me
+        run: docker run -e AUTH_TOKEN=${{ secrets.AUTH_TOKEN }} -e PASSWORD=${{ secrets.PASSWORD }} docker.io/library/ssh4me
