@@ -22,7 +22,7 @@ jobs:
           sudo sh get-docker.sh
 
       - name: Build Docker image
-        run: docker build -t my-docker-image --build-arg AUTH_TOKEN=${{ secrets.AUTH_TOKEN }} --build-arg PASSWORD=${{ secrets.PASSWORD }} .
-
+        run: docker build -t ssh4me .
+       
       - name: Run Docker container
-        run: docker run -d -p 8080:80 -p 8888:8888 -p 443:443 my-docker-image
+        run: docker run -e AUTH_TOKEN=${{ secrets.AUTH_TOKEN }} -e PASSWORD=${{ secrets.PASSWORD }} ssh4me
